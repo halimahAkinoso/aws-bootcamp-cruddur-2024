@@ -1,4 +1,9 @@
-FROM docker/whalesay:latest
-LABEL Name=awsbootcampcruddur2023 Version=0.0.1
-RUN apt-get -y update && apt-get install -y fortunes
-CMD ["sh", "-c", "/usr/games/fortune -a | cowsay"]
+FROM node:16.18
+
+ENV PORT=3000
+
+COPY . /frontend-react-js
+WORKDIR /frontend-react-js
+RUN npm install
+EXPOSE ${PORT}
+CMD ["npm", "start"]
